@@ -119,6 +119,11 @@ https://api.telegram.org/bot<YOUR_TOKEN>/setWebhook?url=<YOUR_RENDER_URL>/webhoo
 
 ---
 
+## 🪟시연화면
+![텔레그램 봇](https://github.com/user-attachments/assets/1299d99b-a7bb-4377-a8ba-d8ca00a96072)
+
+---
+
 ## 👏 제작자
 
 이 프로젝트는 실제 사용자가 직접 겪은 시행착오를 바탕으로 만든 실전형 챗봇입니다.
