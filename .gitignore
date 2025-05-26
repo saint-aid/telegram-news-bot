@@ -1,0 +1,36 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.log
+*.sqlite3
+*.db
+
+# Virtual environments
+venv/
+.env
+.env.*
+
+# Data
+cookies.pkl
+*.csv
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# IDE & editor folders
+.vscode/
+.idea/
+
+# Build
+dist/
+build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
