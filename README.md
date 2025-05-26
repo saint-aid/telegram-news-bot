@@ -54,6 +54,42 @@ https://api.telegram.org/bot<YOUR_TOKEN>/setWebhook?url=https://<your-ngrok>.ngr
 
 ---
 
+## 🌍 Render 배포 가이드
+
+이 프로젝트는 [Render.com](https://render.com)을 통해 무료로 배포했습니다.
+
+### 🚀 배포 단계
+
+1. [Render.com](https://render.com) 접속 → 로그인
+2. "New → Web Service" 클릭
+3. GitHub 저장소 선택
+4. 아래와 같이 설정
+
+| 항목 | 값 |
+|------|-----|
+| Runtime | Python |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `python app.py` |
+| Environment Variables | `BOT_TOKEN=...` 입력 |
+| Branch | main |
+
+5. 배포 완료 후 주소 예: `https://news-telegram-bot.onrender.com`
+
+### 🔗 Webhook 등록
+
+브라우저 주소창에 입력:
+
+```
+https://api.telegram.org/bot<YOUR_TOKEN>/setWebhook?url=<YOUR_RENDER_URL>/webhook
+```
+
+### ☕ 슬립 방지 설정 (선택: 안해도 15분 후에는 5초 딜레이 연결됨)
+
+- [UptimeRobot](https://uptimerobot.com)에서 5분 간격으로 ping 설정
+- 혹은 GitHub Actions로 주기적 ping
+
+---
+
 ## ⚠️ 내가 겪은 주요 시행착오와 해결법
 
 | 문제 상황 | 해결 방법 |
