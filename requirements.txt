@@ -1,6 +1,6 @@
-flask
+#flask
 python-telegram-bot[webhooks]==20.7
-transformers
-torch
+#transformers
+#torch
 python-dotenv
 beautifulsoup4

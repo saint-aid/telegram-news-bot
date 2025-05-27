@@ -47,45 +47,38 @@ headers = {
     "Authorization": f"Bearer {HUGGINGFACE_API_TOKEN}"
 }
 
-def summarize_text(text):
-    """
-    한국어 뉴스 본문을 Hugging Face Inference API를 통해 요약하는 함수
+def summarize_text(text: str) -> str:
+    input_len = len(text.strip().split())
 
-    Args:
-        text (str): 뉴스 기사 본문 텍스트
-
-    Returns:
-        str: 요약 결과 문자열 (또는 오류 메시지)
-    """
-
-    # 본문이 너무 짧을 경우 요약 생략
-    input_len = len(text.split())
     if input_len < 10:
         return "[요약 생략] 본문이 너무 짧습니다."
 
-    # 너무 긴 입력은 앞부분만 자름 (1000자 제한)
     text = text[:1000]
 
     try:
-        #print(f"📄 요약 요청: {text[:50]}...")  # 디버깅용 출력 (앞 50자만 표시)
-        # API 요청
         response = requests.post(
             HUGGINGFACE_API_URL,
             headers=headers,
             json={"inputs": text},
-            timeout=30
+            timeout=10 
         )
-        
 
-        # 응답 성공 시 결과 추출
-        if response.status_code == 200:
-            result = response.json()
-            if result and isinstance(result, list) and "summary_text" in result[0]:
-                return result[0]["summary_text"]
+        response.raise_for_status()  # 4xx, 5xx 에러 자동 발생
+
+        result = response.json()
+
+        if isinstance(result, list) and len(result) > 0:
+            summary = result[0].get("summary_text")
+            if summary:
+                return summary
             else:
-                return "[요약 실패] 요약 결과가 없습니다."
+                return "[요약 실패] 요약 결과에 summary_text가 없습니다."
         else:
-            return f"[요약 실패] {response.status_code} - {response.text}"
+            return "[요약 실패] 모델 응답 형식이 예기치 않습니다."
 
+    except requests.exceptions.Timeout:
+        return "[요약 실패] 요청 시간이 초과되었습니다."
+    except requests.exceptions.RequestException as e:
+        return f"[요약 실패] 요청 오류: {e}"
     except Exception as e:
-        return f"[요약 실패] {str(e)}"
+        return f"[요약 실패] 예외 발생: {e}"

@@ -144,8 +144,9 @@ application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, summariz
 
 # Run Webhook directly (Flask 없이)
 if __name__ == "__main__":
+    #print("🚀 웹훅 서버 시작 준비 완료")
     application.run_webhook(
         listen="0.0.0.0",
         port=int(os.environ.get("PORT", 5000)),
-        webhook_url="https://telegram-news-bot-duau.onrender.com/webhook"
+        webhook_url="https://telegram-news-bot-duau.onrender.com/"
     )
