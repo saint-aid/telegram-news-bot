@@ -100,6 +100,7 @@ https://api.telegram.org/bot<YOUR_TOKEN>/setWebhook?url=<YOUR_RENDER_URL>/webhoo
 | `update.message`가 None | `update.effective_message` 사용으로 해결 |
 | `IndexError` 요약 실패 | `if not result:` 체크로 방어 코드 추가 |
 | Webhook 작동 안 함 | Flask 서버 실행 + ngrok 주소 정확히 등록 확인 필요 |
+| API 호출 작동 안 함 | 모델별로 API 방식이 되는 조건 값이 있음(pipeline_tag:summarization) |
 
 ---
 
