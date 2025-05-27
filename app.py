@@ -41,7 +41,7 @@ CATEGORY_MAP = {
 KEYWORD_MAP = {
     "부동산": ["부동산", "아파트", "전세", "매매"],
     "코인": ["코인", "비트코인", "가상화폐", "암호화폐", "이더리움", "블록체인"],
-    "주식": ["주식", "코스피", "코스닥", "증시", "상장", "개미", "삼성전자"],
+    "주식": ["주식", "코스피", "코스닥", "증시", "상장", "개미", "주가"],
     "ai": ["AI", "인공지능", "생성형", "챗봇", "GPT", "LLM", "클로드", "바드", "오픈AI", "챗GPT"]
 }
 
@@ -140,17 +140,17 @@ async def category(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def donate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = (
         "🙏 챗봇이 도움이 되셨나요?\n\n"
-        "💝 아래 QR코드를 스캔하여 토스로 후원해주실 수 있습니다!\n\n"
-        "_커피 한 잔의 응원이 큰 힘이 됩니다._"
+        "이 챗봇은 무료로 제공되지만, 운영과 유지보수를 위해 후원이 필요합니다.\n"
+        "여러분의 작은 후원이 큰 힘이 됩니다!\n\n"
     )
     await update.message.reply_text(message, parse_mode="Markdown")
 
-     # 이미지 전송
-    if os.path.exists("toss_qr.png"):
-        with open("toss_qr.png", "rb") as photo:
-            await update.message.reply_photo(photo=photo, caption="📱 토스 송금 QR코드")
-    else:
-        await update.message.reply_text("❌ QR 코드 이미지가 아직 등록되지 않았습니다.")
+    # 이미지 전송
+    # if os.path.exists("toss_qr.png"):
+    #     with open("toss_qr.png", "rb") as photo:
+    #         await update.message.reply_photo(photo=photo, caption="📱 토스 송금 QR코드")
+    # else:
+    #     await update.message.reply_text("❌ QR 코드 이미지가 아직 등록되지 않았습니다.")
 
 # 핸들러 등록
 application.add_handler(CommandHandler("start", start))

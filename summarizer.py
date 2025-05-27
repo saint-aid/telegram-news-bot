@@ -32,9 +32,12 @@
 
 import os
 import requests
+from dotenv import load_dotenv
+
+load_dotenv() 
 
 # 🤗 Hugging Face Inference API URL (KoBART 요약 모델)
-HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/digit82/kobart-summarization"
+HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/eenzeenee/t5-base-korean-summarization"
 
 # 환경변수에서 API 토큰 가져오기 (.env 또는 Render 환경 설정에서 설정)
 HUGGINGFACE_API_TOKEN = os.getenv("HF_API_TOKEN")
@@ -64,6 +67,7 @@ def summarize_text(text):
     text = text[:1000]
 
     try:
+        #print(f"📄 요약 요청: {text[:50]}...")  # 디버깅용 출력 (앞 50자만 표시)
         # API 요청
         response = requests.post(
             HUGGINGFACE_API_URL,
@@ -71,6 +75,7 @@ def summarize_text(text):
             json={"inputs": text},
             timeout=30
         )
+        
 
         # 응답 성공 시 결과 추출
         if response.status_code == 200:
